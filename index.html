@@ -16,15 +16,15 @@ layout: null
 button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inherit}a{color:inherit}button:focus-visible,a:focus-visible{outline:2px solid #977eae;outline-offset:5px}button{cursor:pointer}button:disabled{cursor:default}
 .stage{min-height:100svh;display:grid;place-items:center;padding:66px 72px 76px;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#fff 0%,#f4f2ee 55%,#e8e5df 100%);perspective:2200px}
 .scene{width:min(1040px,100%);position:relative;perspective:2200px}
-.album{position:relative;width:100%;height:min(650px,calc(100svh - 148px));min-height:530px;transform:translateX(-25%);transition:transform var(--duration) cubic-bezier(.22,.72,.15,1);transform-style:preserve-3d}
+.album{position:relative;width:100%;height:min(650px,calc(100svh - 148px));min-height:530px;transform:translateX(-25%);transition:transform var(--duration) cubic-bezier(.22,.72,.15,1);transform-style:flat;perspective:1800px}
 .album.is-open{transform:translateX(0)}
-.spread{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;border-radius:5px 10px 10px 5px;background:var(--paper);box-shadow:0 26px 55px #3b334025,0 3px 8px #39313916;opacity:0;visibility:hidden;transition:opacity 500ms 200ms,visibility 0s 500ms;transform:translateZ(-2px)}
+.spread{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;border-radius:5px 10px 10px 5px;background:var(--paper);box-shadow:0 26px 55px #3b334025,0 3px 8px #39313916;opacity:0;visibility:hidden;transition:opacity 500ms 200ms,visibility 0s 500ms;transform:none;z-index:1}
 .is-open .spread{opacity:1;visibility:visible;transition:opacity 500ms 100ms,visibility 0s}
 .spread::after{content:"";position:absolute;top:0;bottom:0;left:50%;width:38px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,#4b40400d 35%,#30252c24 49%,#fff8 53%,#5745500b 70%,transparent);pointer-events:none;z-index:3}
 .page{position:relative;min-width:0;min-height:0}.photo-page{padding:33px 34px 72px;background:linear-gradient(90deg,#fffdf9,#f9f6f0);border-radius:5px 0 0 5px}
 .photograph{height:calc(100% - 69px);margin:0;position:relative;overflow:hidden;background:#e7e0ed;box-shadow:0 1px 4px #30283a25;border:7px solid white;transform:rotate(-1.5deg)}
-.photograph img{width:100%;height:100%;object-fit:cover;object-position:73% center;filter:blur(24px);transform:scale(1.13);clip-path:inset(0 100% 0 0);transition:filter 1550ms 300ms,transform 1800ms 300ms,clip-path 1400ms 300ms cubic-bezier(.2,.7,.2,1)}
-.is-open .photograph img{filter:blur(0);transform:scale(1.02);clip-path:inset(0)}
+.photograph img{width:100%;height:100%;object-fit:cover;object-position:73% center}
+
 .photo-note{margin:23px 0 0;text-align:center;font-family:Georgia,"Songti SC",SimSun,serif;font-size:14px;letter-spacing:3px;color:#877d86}.photo-meta{text-align:center;margin:3px 0 0;font-size:9px;letter-spacing:2.5px;color:#b5abb2}
 .close-book{position:absolute;bottom:23px;left:35px;border:0;background:transparent;padding:4px 0;color:#9a9098;font-size:11px;letter-spacing:1px}.close-book:hover{color:#5b466b}
 .reading-page{border-radius:0 10px 10px 0;background:linear-gradient(90deg,#f5f1e9 0%,var(--paper) 8%);display:flex;flex-direction:column;padding:34px 40px 18px 38px}
@@ -42,14 +42,40 @@ button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inher
 .cover-front::before{content:"";position:absolute;left:17px;top:0;bottom:0;border-left:1px solid #f1eeee;box-shadow:1px 0 1px #fff}
 .cover-title{font-family:Georgia,"Times New Roman",serif;font-weight:400;letter-spacing:clamp(5px,.9vw,12px);font-size:clamp(21px,3vw,38px);padding-left:12px;white-space:nowrap;color:#c5c1c0;text-shadow:0 1px 0 #fff,0 -1px 1px #aaa6a633;transform:translateY(-9px)}
 .cover-back{transform:rotateY(180deg);background:linear-gradient(90deg,#f4f0e9,#fffdf9 10%);box-shadow:inset -10px 0 24px #796d6710}
-.is-open .cover{transform:rotateY(-179deg);opacity:0;pointer-events:none;transition:transform var(--duration) cubic-bezier(.26,.65,.15,1),opacity 180ms 1300ms}
+.is-open .cover{transform:rotateY(-176deg);pointer-events:none}
 .open-hint{position:absolute;top:calc(100% + 31px);left:0;right:0;text-align:center;color:#ada6a6;font-size:11px;letter-spacing:4px;transition:opacity 300ms}.is-open~.open-hint{opacity:0;visibility:hidden;pointer-events:none}
 .post-list{list-style:none;margin:0;padding:0}.post-item{border-bottom:1px solid var(--line);padding:17px 0}.post-item:first-child{padding-top:0}.post-item a{display:block;text-decoration:none}.post-item a:hover .post-title{color:#9b7db0}.post-date{font-size:10px;letter-spacing:2px;color:#b5a8b5}.post-title{font-family:Georgia,"Songti SC",SimSun,serif;font-size:19px;color:#5a4d60;line-height:1.65;margin:4px 0;overflow-wrap:anywhere}.post-excerpt{font-size:12px;color:#9d919d;line-height:1.9;margin:0;overflow-wrap:anywhere}.empty{padding:32px 0 22px}.empty-mark{font-family:Georgia,serif;font-size:46px;line-height:1.2;color:#dfd4e0;margin-bottom:17px}.empty p{font-size:13px;color:#9e929e;line-height:2;margin:0}.about-copy{font-size:14px;line-height:2.1;color:#8e8490}.topics{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0}.topics span{border-bottom:1px solid #d7cad8;color:#9c889e;font-size:11px;letter-spacing:1px;padding:3px 0;margin-right:9px}.mobile-photo{display:none}
 @media(min-width:1500px){.album{height:690px;max-height:calc(100svh - 148px)}}
 @media(max-width:900px) and (min-width:701px){.stage{padding:55px 58px}.reading-page{padding-left:25px;padding-right:25px}.photo-page{padding:25px 24px 72px}.cover-title{font-size:26px;letter-spacing:5px}.intro{font-size:13px}}
-@media(max-width:700px){.stage{padding:38px 46px 55px 20px;perspective:1600px;min-height:100svh}.scene{width:min(440px,100%)}.album{height:calc(100svh - 110px);max-height:740px;min-height:520px;transform:none}.album.is-open{transform:none}.spread{grid-template-columns:1fr}.spread::after{left:0;width:22px;transform:none;background:linear-gradient(90deg,#56454918,transparent)}.photo-page{display:none}.reading-page{padding:23px 24px 13px;border-radius:5px 9px 9px 5px}.cover{left:0;width:calc(100% + 3px)}.cover-title{font-size:clamp(23px,6.2vw,34px);letter-spacing:6px}.cover-front::before{left:13px}.is-open .cover{transform:rotateY(-155deg)}.bookmarks{top:36px;gap:11px}.bookmark{width:29px;height:78px;font-size:11px;padding:9px 5px 16px}.bookmark[aria-selected="true"],.bookmark:hover{width:34px}.page-top{margin-bottom:18px;padding-bottom:10px;font-size:8px}.panel h1{font-size:25px;margin-bottom:12px}.panel h2{font-size:26px}.kicker{font-size:9px;margin:2px 0 12px}.intro{font-size:12px;line-height:1.9}.mobile-photo{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center;margin:19px 0 15px;border:5px solid white;box-shadow:0 1px 5px #57436120;filter:blur(20px);clip-path:inset(0 100% 0 0);transition:filter 1400ms 300ms,clip-path 1400ms 300ms}.is-open .mobile-photo{filter:blur(0);clip-path:inset(0)}.divider{margin:18px 0}.motto{font-size:14px}.welcome-foot{margin-top:18px;font-size:9px}.paper-link{margin-top:17px;font-size:11px}.page-footer{margin-top:9px;padding-top:8px}.open-hint{top:calc(100% + 20px);font-size:10px;letter-spacing:3px}.mobile-close{border:0;background:none;padding:4px 0;font-size:10px;color:#9a879d;letter-spacing:1px}.close-book{display:none}}
+@media(max-width:700px){.stage{padding:38px 46px 55px 20px;perspective:1600px;min-height:100svh}.scene{width:min(440px,100%)}.album{height:calc(100svh - 110px);max-height:740px;min-height:520px;transform:none}.album.is-open{transform:none}.spread{grid-template-columns:1fr}.spread::after{left:0;width:22px;transform:none;background:linear-gradient(90deg,#56454918,transparent)}.photo-page{display:none}.reading-page{padding:23px 24px 13px;border-radius:5px 9px 9px 5px}.cover{left:0;width:calc(100% + 3px)}.cover-title{font-size:clamp(23px,6.2vw,34px);letter-spacing:6px}.cover-front::before{left:13px}.is-open .cover{transform:rotateY(-155deg)}.bookmarks{top:36px;gap:11px}.bookmark{width:29px;height:78px;font-size:11px;padding:9px 5px 16px}.bookmark[aria-selected="true"],.bookmark:hover{width:34px}.page-top{margin-bottom:18px;padding-bottom:10px;font-size:8px}.panel h1{font-size:25px;margin-bottom:12px}.panel h2{font-size:26px}.kicker{font-size:9px;margin:2px 0 12px}.intro{font-size:12px;line-height:1.9}.mobile-photo{display:block}.divider{margin:18px 0}.motto{font-size:14px}.welcome-foot{margin-top:18px;font-size:9px}.paper-link{margin-top:17px;font-size:11px}.page-footer{margin-top:9px;padding-top:8px}.open-hint{top:calc(100% + 20px);font-size:10px;letter-spacing:3px}.mobile-close{border:0;background:none;padding:4px 0;font-size:10px;color:#9a879d;letter-spacing:1px}.close-book{display:none}}
 @media(min-width:701px){.mobile-close{display:none}}
 @media(prefers-reduced-motion:reduce){:root{--duration:1ms}*,*::before,*::after{animation:none!important;transition:none!important}.photograph img,.mobile-photo{filter:none!important;clip-path:none!important;transform:none!important}}
+
+/* The inner pages stay in the ordinary 2D hit-testing plane. */
+:root{--duration:900ms}
+.album{transform-style:flat;perspective:1800px}
+.spread{transform:none;z-index:1;transition:opacity 220ms,visibility 0s 220ms}
+.is-open .spread{transition:opacity 220ms 70ms,visibility 0s}
+.cover{transition:transform var(--duration) cubic-bezier(.22,.65,.2,1);opacity:1}
+.is-open .cover{transition:transform var(--duration) cubic-bezier(.22,.65,.2,1);opacity:1;pointer-events:none}
+.is-open.is-settled .cover{visibility:hidden}
+.is-moving{will-change:transform}.is-moving .cover{will-change:transform}
+.photo-window{isolation:isolate}
+.photograph img{filter:none;clip-path:none;transform:none;transition:none}
+.photograph .photo-soft,.mobile-photo-frame .photo-soft{position:absolute;inset:0;width:100%;height:100%;filter:blur(8px);transform:scale(1.045);opacity:1;clip-path:none;transition:opacity 450ms 300ms;pointer-events:none}
+.is-open .photo-window .photo-soft{opacity:0}
+.photo-window::after{content:"";position:absolute;inset:-1px;background:#fffefa;transform:scaleX(1);transform-origin:right center;transition:transform 720ms 120ms cubic-bezier(.22,.65,.2,1);pointer-events:none;z-index:2}
+.is-open .photo-window::after{transform:scaleX(0)}
+.is-moving .photo-soft{will-change:opacity}.is-moving .photo-window::after{will-change:transform}
+.is-settled .photo-soft{visibility:hidden}
+.mobile-photo-frame{display:none}
+@media(max-width:700px){
+ .mobile-photo-frame{display:block;position:relative;width:100%;aspect-ratio:16/9;margin:19px 0 15px;overflow:hidden;border:5px solid white;box-shadow:0 1px 5px #57436120;background:#e7e0ed}
+ .mobile-photo-frame .mobile-photo{display:block;position:absolute;inset:0;width:100%;height:100%;margin:0;border:0;box-shadow:none;filter:none;clip-path:none;transform:none;transition:none;object-fit:cover;object-position:center}
+ .mobile-photo-frame .photo-soft{object-fit:cover;object-position:center}
+}
+@media(prefers-reduced-motion:reduce){.photo-window::after{transform:scaleX(0)}.photo-window .photo-soft{opacity:0}.is-open .cover{visibility:hidden}}
+
 </style>
 </head>
 <body>
@@ -58,7 +84,7 @@ button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inher
   <div class="album" id="album">
    <div class="spread" id="album-pages" inert>
     <section class="page photo-page" aria-label="相簿照片">
-     <figure class="photograph"><img src="{{ '/Kazusa.png' | relative_url }}" alt="蓝紫色光影中的白裙动漫人物" fetchpriority="high" width="1920" height="1077"></figure>
+     <figure class="photograph photo-window"><img src="{{ '/Kazusa.png' | relative_url }}" alt="蓝紫色光影中的白裙动漫人物" fetchpriority="high" width="1920" height="1077"><img class="photo-soft" src="{{ '/Kazusa.png' | relative_url }}" alt="" aria-hidden="true" decoding="async" width="1920" height="1077"></figure>
      <p class="photo-note">WHITE ALBUM</p><p class="photo-meta">MEMORIES IN THESE PAGES</p>
      <button class="close-book" type="button" data-close>← 合上相簿</button>
     </section>
@@ -67,7 +93,7 @@ button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inher
      <div class="panels">
       <section class="panel" id="panel-home" role="tabpanel" aria-labelledby="tab-home" tabindex="0">
        <p class="kicker">PREFACE / 卷首</p><h1>{{ site.title | escape }}</h1><p class="intro">{{ site.description | escape }}</p>
-       <img class="mobile-photo" src="{{ '/Kazusa.png' | relative_url }}" alt="相簿扉页照片" width="1920" height="1077">
+       <div class="mobile-photo-frame photo-window"><img class="mobile-photo" src="{{ '/Kazusa.png' | relative_url }}" alt="相簿扉页照片" decoding="async" width="1920" height="1077"><img class="photo-soft" src="{{ '/Kazusa.png' | relative_url }}" alt="" aria-hidden="true" decoding="async" width="1920" height="1077"></div>
        <div class="divider"></div><p class="motto">把平常的日子，<br>一页一页地收藏。</p><p class="welcome-foot">学习 · 生活 · 娱乐 · 思考</p><button class="paper-link" type="button" data-go="1">翻阅记录 <span aria-hidden="true">→</span></button>
       </section>
       <section class="panel" id="panel-posts" role="tabpanel" aria-labelledby="tab-posts" tabindex="0" hidden>
@@ -96,12 +122,13 @@ button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inher
  </div>
 </main>
 <script>
+
 (function(){
  'use strict';
  const album=document.getElementById('album'),cover=document.getElementById('cover'),spread=document.getElementById('album-pages');
  const tabs=Array.from(document.querySelectorAll('[role="tab"]')),panels=Array.from(document.querySelectorAll('[role="tabpanel"]'));
  const previous=document.getElementById('previous'),next=document.getElementById('next'),folio=document.getElementById('folio');
- let opened=false,page=0,focusTimer;
+ let opened=false,page=0,motionTimer;
  function showPage(index,focus){
   page=Math.max(0,Math.min(index,tabs.length-1));
   tabs.forEach(function(tab,i){tab.setAttribute('aria-selected',String(i===page));tab.tabIndex=i===page?0:-1;panels[i].hidden=i!==page;});
@@ -109,23 +136,36 @@ button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inher
   folio.textContent=String(page+1).padStart(2,'0')+' / 03';
   if(focus)panels[page].focus({preventScroll:true});
  }
+ function finishMotion(){album.classList.remove('is-moving');album.classList.toggle('is-settled',opened);}
+ function startMotion(){
+  clearTimeout(motionTimer);album.classList.remove('is-settled');album.classList.add('is-moving');
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){finishMotion();return;}
+  // Fallback also handles interrupted transitions and background tabs.
+  motionTimer=setTimeout(finishMotion,960);
+ }
  function openBook(){
-  if(opened)return;opened=true;clearTimeout(focusTimer);
-  album.classList.add('is-open');cover.setAttribute('aria-expanded','true');cover.tabIndex=-1;spread.inert=false;tabs[page].focus({preventScroll:true});cover.setAttribute('aria-hidden','true');
-  const wait=window.matchMedia('(prefers-reduced-motion: reduce)').matches?0:1580;
-  focusTimer=setTimeout(function(){if(opened&&document.activeElement===cover)tabs[page].focus({preventScroll:true});},wait);
+  if(opened)return;opened=true;album.classList.add('is-open');startMotion();
+  spread.inert=false;cover.setAttribute('aria-expanded','true');cover.tabIndex=-1;
+  tabs[page].focus({preventScroll:true});cover.setAttribute('aria-hidden','true');cover.inert=true;
  }
  function closeBook(){
-  if(!opened)return;opened=false;clearTimeout(focusTimer);
-  cover.removeAttribute('aria-hidden');cover.tabIndex=0;cover.setAttribute('aria-expanded','false');cover.focus({preventScroll:true});spread.inert=true;album.classList.remove('is-open');
+  if(!opened)return;opened=false;album.classList.remove('is-open');startMotion();
+  cover.inert=false;cover.removeAttribute('aria-hidden');cover.tabIndex=0;cover.setAttribute('aria-expanded','false');
+  cover.focus({preventScroll:true});spread.inert=true;
  }
  cover.addEventListener('click',openBook);
+ cover.addEventListener('transitionend',function(event){if(event.target===cover&&event.propertyName==='transform'){clearTimeout(motionTimer);finishMotion();}});
  document.querySelectorAll('[data-close]').forEach(function(button){button.addEventListener('click',closeBook);});
- tabs.forEach(function(tab,index){tab.addEventListener('click',function(){showPage(index,false);});tab.addEventListener('keydown',function(event){let target=index;if(event.key==='ArrowDown'||event.key==='ArrowRight')target=(index+1)%tabs.length;else if(event.key==='ArrowUp'||event.key==='ArrowLeft')target=(index+tabs.length-1)%tabs.length;else if(event.key==='Home')target=0;else if(event.key==='End')target=tabs.length-1;else return;event.preventDefault();showPage(target,false);tabs[target].focus();});});
+ tabs.forEach(function(tab,index){
+  tab.addEventListener('click',function(){showPage(index,false);});
+  tab.addEventListener('keydown',function(event){let target=index;if(event.key==='ArrowDown'||event.key==='ArrowRight')target=(index+1)%tabs.length;else if(event.key==='ArrowUp'||event.key==='ArrowLeft')target=(index+tabs.length-1)%tabs.length;else if(event.key==='Home')target=0;else if(event.key==='End')target=tabs.length-1;else return;event.preventDefault();showPage(target,false);tabs[target].focus();});
+ });
  document.querySelectorAll('[data-go]').forEach(function(button){button.addEventListener('click',function(){showPage(Number(button.dataset.go),true);});});
  previous.addEventListener('click',function(){showPage(page-1,true);});next.addEventListener('click',function(){showPage(page+1,true);});
  document.addEventListener('keydown',function(event){if(event.key==='Escape'&&opened){event.preventDefault();closeBook();}});
+ document.querySelectorAll('.photo-window img').forEach(function(image){if(image.decode)image.decode().catch(function(){});});
 })();
+
 </script>
 </body>
 </html>
