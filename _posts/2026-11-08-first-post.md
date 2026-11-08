@@ -6,6 +6,13 @@ title: "关于我"
 
 你好，我是 **L0ngD1**，目前是 **东北大学软件工程(特色班)** 在读大一
 
+## 在不同地方找到相同的我
+- [Github](https://github.com/L0ngD1) 
+- [B站/bilibili](https://space.bilibili.com/472910382?spm_id_from=333.1007.0.0)
+- QQ(邮箱):1410802398(@qq.com)
+- 微信：L0ngD1
+
+
 ## 我喜欢什么
 - **玩游戏**：主机游戏、CS 和 OW 等网游，以及 Galgame
 - **听音乐**：国语／日语：R&B、ACG 配乐等等
