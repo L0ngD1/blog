@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'zh-CN' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f0eb">
+  <title>{% if page.layout == 'post' %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }} · WHITE ALBUM</title>
+  <meta name="description" content="{{ site.description | escape }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="stylesheet" href="{{ '/assets/book.css' | relative_url }}?v=20261117">
+  <script defer src="{{ '/assets/book.js' | relative_url }}?v=20261117"></script>
+</head>
+<body data-current-url="{{ page.url | relative_url }}">
+<main class="desk" aria-label="WHITE ALBUM 个人博客">
+ <div class="book-scene">
+  <div class="book" id="book">
+   <div class="inside" id="inside" inert>
+    <div class="spread" id="spread" aria-label="书页">
+     <div class="page-slot" id="left-slot"></div><div class="page-slot" id="right-slot"></div>
+    </div>
+    <div class="turn-stage" id="turn-stage" aria-hidden="true" inert></div>
+    <nav class="ribbons" aria-label="章节书签">
+     <button type="button" data-section="home" aria-current="page">卷首</button>
+     <button type="button" data-section="contents">目录</button>
+     <button type="button" data-section="about">关于</button>
+     <button type="button" id="article-ribbon" class="article-ribbon" hidden>正文</button>
+    </nav>
+    <div class="book-tools">
+     <button type="button" id="close-book" class="text-button">← 合上</button>
+     <span id="page-status" class="page-status">卷首</span>
+     <div class="page-buttons"><button type="button" id="previous" aria-label="上一页">←</button><button type="button" id="next" aria-label="下一页">→</button></div>
+    </div>
+   </div>
+   <button class="cover" id="cover" type="button" aria-label="翻开 WHITE ALBUM 相簿" aria-expanded="false" aria-controls="inside"><span class="cover-face"><span>WHITE ALBUM</span></span><span class="cover-back" aria-hidden="true"></span></button>
+  </div>
+  <p class="opening-hint">点击封面，翻开相簿</p>
+ </div>
+ <span id="reading-status" class="sr-only" role="status" aria-live="polite"></span>
+</main>
+<div id="page-bank" hidden></div>
+<div id="measure" class="measure" aria-hidden="true" inert></div>
+<div id="chapter-sources" hidden>
+ <template data-chapter="home" data-title="卷首" data-kind="home">
+  <div class="photo-intro"><figure class="album-photo"><img src="{{ '/Kazusa.png' | relative_url }}" alt="蓝紫色光影中的白裙动漫人物" width="1920" height="1077" decoding="async"><img class="soft-photo" src="{{ '/Kazusa.png' | relative_url }}" alt="" aria-hidden="true" width="1920" height="1077" decoding="async"></figure><p class="photo-caption">WHITE ALBUM</p><p class="tiny">MEMORIES IN THESE PAGES</p></div>
+  <div class="welcome"><p class="eyebrow">PREFACE / 卷首</p><h1>{{ site.title | escape }}</h1><p class="intro">{{ site.description | escape }}</p><hr><p class="motto">把平常的日子，<br>一页一页地收藏。</p><p class="tiny">学习 · 生活 · 娱乐 · 思考</p><a class="paper-action" href="#section=contents" data-open="contents">翻阅记录 →</a></div>
+ </template>
+ <template data-chapter="contents" data-title="目录">
+  <p class="eyebrow">CONTENTS / 目录</p><h1>那些记录</h1><p class="intro">每一篇记录，都是这本书的一部分。</p>
+  {% for post in site.posts %}
+  <div class="contents-entry"><time>{{ post.date | date: '%Y.%m.%d' }}</time><h2><a href="{{ post.url | relative_url }}" data-open="article-{{ post.slug | escape }}">{{ post.title | escape }} <span aria-hidden="true">↗</span></a></h2><p>{{ post.excerpt | strip_html | truncate: 72 | escape }}</p></div>
+  {% else %}<p>空白页正在等待第一篇记录。</p>{% endfor %}
+ </template>
+ {% assign about_post = site.posts | where: 'title', '关于我' | first %}
+ <template data-chapter="about" data-title="关于我" data-url="{% if about_post %}{{ about_post.url | relative_url }}{% endif %}">
+  {% if about_post %}<header class="article-heading"><p class="eyebrow">ABOUT / 关于我</p><h1>{{ about_post.title | escape }}</h1></header>{{ about_post.content | markdownify }}{% else %}<p class="eyebrow">ABOUT / 关于</p><h1>关于这本相簿</h1><p>{{ site.description | escape }}</p><p>把学到的东西、经历的片刻和偶然冒出的想法，慢慢留下。</p><p><a href="https://github.com/L0ngD1">在 GitHub 找到我 ↗</a></p>{% endif %}
+ </template>
+ {% for post in site.posts %}
+ <template data-chapter="article-{{ post.slug | escape }}" data-title="{{ post.title | escape }}" data-kind="article" data-url="{{ post.url | relative_url }}">
+  <header class="article-heading"><p class="eyebrow">JOURNAL / {{ post.date | date: '%Y.%m.%d' }}</p><h1>{{ post.title | escape }}</h1></header>
+  {% if post.url == page.url %}{{ content }}{% else %}{{ post.content | markdownify }}{% endif %}
+ </template>
+ {% endfor %}
+</div>
+<noscript><div class="no-script"><h1>{{ site.title | escape }}</h1><p>翻页阅读需要启用 JavaScript。你也可以直接阅读下面的文章内容。</p>{% if page.layout == 'post' %}<h2>{{ page.title | escape }}</h2>{{ content }}{% else %}{% for post in site.posts %}<h2>{{ post.title | escape }}</h2>{{ post.content | markdownify }}{% endfor %}{% endif %}</div></noscript>
+</body>
+</html>
