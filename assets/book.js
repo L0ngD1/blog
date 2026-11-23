@@ -98,7 +98,7 @@ function paginate(key){
    }
    measure.append(node);if(fits())continue;node.remove();
    const hadContent=measure.childNodes.length>0;
-   const atomic=isHeading||node.matches('pre,table,figure,iframe,video,hr,.contents-entry')||Boolean(node.querySelector('img,iframe,video,pre,table'));
+   const atomic=isHeading||node.matches('pre,table,figure,iframe,video,hr,.contents-entry,.contents-group')||Boolean(node.querySelector('img,iframe,video,pre,table'));
    if(hadContent){const last=measure.lastElementChild;const used=last?last.getBoundingClientRect().bottom-measure.getBoundingClientRect().top:0;if(atomic||metrics.height-used<metrics.height*.24){commit();queue.unshift(node);continue;}}
    if(!atomic&&node.textContent.length>1){
     const split=maxPrefix(node);

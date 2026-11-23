@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "关于我"
+category: "关于我"
 ---
 # 基本信息
 

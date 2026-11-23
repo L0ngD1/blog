@@ -7,8 +7,8 @@
   <title>{% if page.layout == 'post' %}{{ page.title | escape }} · {% endif %}{{ site.title | escape }} · WHITE ALBUM</title>
   <meta name="description" content="{{ site.description | escape }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
-  <link rel="stylesheet" href="{{ '/assets/book.css' | relative_url }}?v=20261117">
-  <script defer src="{{ '/assets/book.js' | relative_url }}?v=20261117"></script>
+  <link rel="stylesheet" href="{{ '/assets/book.css' | relative_url }}?v=20261123-toc">
+  <script defer src="{{ '/assets/book.js' | relative_url }}?v=20261123-toc"></script>
 </head>
 <body data-current-url="{{ page.url | relative_url }}">
 <main class="desk" aria-label="WHITE ALBUM 个人博客">
@@ -22,7 +22,7 @@
     <nav class="ribbons" aria-label="章节书签">
      <button type="button" data-section="home" aria-current="page">卷首</button>
      <button type="button" data-section="contents">目录</button>
-     <button type="button" data-section="about">关于</button>
+     <button type="button" data-section="about">关于我</button>
      <button type="button" id="article-ribbon" class="article-ribbon" hidden>正文</button>
     </nav>
     <div class="book-tools">
@@ -44,13 +44,27 @@
   <div class="photo-intro"><figure class="album-photo"><img src="{{ '/Kazusa.png' | relative_url }}" alt="蓝紫色光影中的白裙动漫人物" width="1920" height="1077" decoding="async"><img class="soft-photo" src="{{ '/Kazusa.png' | relative_url }}" alt="" aria-hidden="true" width="1920" height="1077" decoding="async"></figure><p class="photo-caption">WHITE ALBUM</p><p class="tiny">MEMORIES IN THESE PAGES</p></div>
   <div class="welcome"><p class="eyebrow">PREFACE / 卷首</p><h1>{{ site.title | escape }}</h1><p class="intro">{{ site.description | escape }}</p><hr><p class="motto">把平常的日子，<br>一页一页地收藏。</p><p class="tiny">学习 · 生活 · 娱乐 · 思考</p><a class="paper-action" href="#section=contents" data-open="contents">翻阅记录 →</a></div>
  </template>
- <template data-chapter="contents" data-title="目录">
-  <p class="eyebrow">CONTENTS / 目录</p><h1>那些记录</h1><p class="intro">每一篇记录，都是这本书的一部分。</p>
-  {% for post in site.posts %}
-  <div class="contents-entry"><time>{{ post.date | date: '%Y.%m.%d' }}</time><h2><a href="{{ post.url | relative_url }}" data-open="article-{{ post.slug | escape }}">{{ post.title | escape }} <span aria-hidden="true">↗</span></a></h2><p>{{ post.excerpt | strip_html | truncate: 72 | escape }}</p></div>
-  {% else %}<p>空白页正在等待第一篇记录。</p>{% endfor %}
- </template>
  {% assign about_post = site.posts | where: 'title', '关于我' | first %}
+ <template data-chapter="contents" data-title="目录">
+  <p class="eyebrow">CONTENTS / 目录</p><h1>目 录</h1><p class="intro">关于自己，关于生活，关于亲手做过的事。</p>
+  <section class="contents-group contents-about" aria-label="关于我">
+   <h2 class="contents-part"><span class="part-number">一</span>{% if about_post %}<a class="contents-direct" href="{{ about_post.url | relative_url }}" data-open="about"><span>关于我</span><span class="contents-leader" aria-hidden="true"></span><span class="contents-read">阅读</span></a>{% else %}<a href="#section=about" data-open="about">关于我</a>{% endif %}</h2>
+  </section>
+  {% assign contents_sections = '感想与思考|项目' | split: '|' %}
+  {% for section in contents_sections %}
+  <section class="contents-group" aria-label="{{ section }}">
+   <h2 class="contents-part"><span class="part-number">{% if section == '感想与思考' %}二{% else %}三{% endif %}</span><span>{{ section }}</span></h2>
+   <ol class="contents-list">
+    {% for post in site.posts %}
+     {% assign post_category = post.category | default: '感想与思考' %}
+     {% if post.title != '关于我' and post_category == section %}
+     <li><a class="contents-row" href="{{ post.url | relative_url }}" data-open="article-{{ post.slug | escape }}"><span class="contents-title">{{ post.title | escape }}</span><span class="contents-leader" aria-hidden="true"></span><time datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: '%Y.%m.%d' }}</time></a></li>
+     {% endif %}
+    {% endfor %}
+   </ol>
+  </section>
+  {% endfor %}
+ </template>
  <template data-chapter="about" data-title="关于我" data-url="{% if about_post %}{{ about_post.url | relative_url }}{% endif %}">
   {% if about_post %}<header class="article-heading"><p class="eyebrow">ABOUT / 关于我</p><h1>{{ about_post.title | escape }}</h1></header>{{ about_post.content | markdownify }}{% else %}<p class="eyebrow">ABOUT / 关于</p><h1>关于这本相簿</h1><p>{{ site.description | escape }}</p><p>把学到的东西、经历的片刻和偶然冒出的想法，慢慢留下。</p><p><a href="https://github.com/L0ngD1">在 GitHub 找到我 ↗</a></p>{% endif %}
  </template>
